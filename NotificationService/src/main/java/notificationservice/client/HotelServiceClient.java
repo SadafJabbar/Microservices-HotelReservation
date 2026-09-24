@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class HotelServiceClient {
 
 
+
     RestTemplate restTemplate = new RestTemplate();
 
     @Value("${hotelservice.url}")

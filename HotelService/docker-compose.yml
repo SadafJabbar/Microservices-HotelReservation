@@ -5,7 +5,7 @@ services:
     restart: always
 
     environment:
-      MYSQL_ROOT_PASSWORD: YOUR-PASSWORD
+      MYSQL_ROOT_PASSWORD: ${YOUR_PASSWORD}
       MYSQL_DATABASE: hotel_booking_db
 
     ports:

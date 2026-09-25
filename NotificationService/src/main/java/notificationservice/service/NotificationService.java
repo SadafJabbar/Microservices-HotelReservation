@@ -3,7 +3,6 @@ package notificationservice.service;
 
 import bookingservice.event.BookingEvent;
 import lombok.extern.slf4j.Slf4j;
-import notificationservice.client.HotelServiceClient;
 import notificationservice.event.NotificationEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,17 +12,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class NotificationService
 {
-    private final HotelServiceClient hotelServiceClient;
-    @Autowired
-    public NotificationService(HotelServiceClient hotelServiceClient){
-        this.hotelServiceClient=hotelServiceClient;
-    }
-
     @KafkaListener(topics = "Booking",groupId = "notification-service")
     public void orderEvent(BookingEvent bookingEvent){
         log.info("received booking:{}", bookingEvent);
         NotificationEvent notificationEvent=createNotification(bookingEvent);
-        hotelServiceClient.UpdateRoomStatus(bookingEvent.getRoomId());
         log.info("room has been booked:{}",notificationEvent);
     }
 

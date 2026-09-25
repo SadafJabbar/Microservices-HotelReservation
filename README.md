@@ -4,24 +4,39 @@ A small **Hotel Reservation Microservices** project built with Spring Boot to pr
 
 ## Architecture
 
-```text
-Client
-   ↓
-API Gateway :8090
-   ↓
-┌───────────────────────┐
-│                       │
-Hotel Service       Booking Service
-   :8080                :8081
-                         ↓
-                      Kafka
-                         ↓
-               Notification Service
-                      :8082
-                         ↓
-                   Hotel Service
-                      :8080
-```
+                    Client
+                      │
+                      ▼
+              API Gateway :8090
+                 │          │
+                 ▼          ▼
+          Hotel Service   Booking Service
+             :8080           :8081
+                                │
+                   ┌────────────┴────────────┐
+                   │                         │
+                   ▼                         ▼
+             Hotel Service                 Kafka
+                :8080                        │
+                                             ▼
+                                  Notification Service
+                                         :8082
+
+### Booking Process
+
+1. **Client sends a booking request** to the API Gateway.
+2. **API Gateway forwards the request** to the Booking Service.
+3. **Booking Service contacts the Hotel Service** to verify the hotel and room availability.
+4. **Hotel Service returns the result** to the Booking Service.
+5. **Booking Service creates the booking** if the room is available.
+6. **Booking Service contacts the Hotel Service** to update the room status.
+7. **Booking Service publishes a booking event** to Kafka.
+8. **Kafka delivers the event** to the Notification Service.
+9. **Notification Service processes the event** and sends the notification.
+
+**Key communication:**
+`Booking Service → Hotel Service` for room operations
+`Booking Service → Kafka → Notification Service` for booking events
 
 ## Technologies
 

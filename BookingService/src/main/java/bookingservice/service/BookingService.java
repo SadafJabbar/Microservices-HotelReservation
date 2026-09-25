@@ -62,6 +62,7 @@ public class BookingService {
             throw new RuntimeException("Check-in must be before check-out");}
         Booking booking = bookingMapper.transformToEntity(bookingRequest);
         booking.setStatus(BookingStatus.CONFIRMED);
+        hotelServiceClient.UpdateRoomStatus(bookingRequest.roomId());
         Booking savedBooking = bookingRepository.save(booking);
         BookingEvent bookingEvent=bookingMapper.transformToBookingEvent(booking);
         kafkaTemplate.send("Booking",bookingEvent);

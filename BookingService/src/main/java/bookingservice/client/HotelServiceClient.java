@@ -24,5 +24,9 @@ public class HotelServiceClient {
         return restTemplate.getForObject(url + "/Hotel/Exists/" + id , Boolean.class);
     }
 
+    public String UpdateRoomStatus(Long id){
+        return restTemplate.exchange(url + "/Room/update/" + id, HttpMethod.PUT,null,String.class).getBody();
+    }
+
 
 }

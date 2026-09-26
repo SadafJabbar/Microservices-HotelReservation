@@ -1,15 +1,11 @@
 package hotelservice.Controller;
 
-import hotelservice.Repository.HotelRepository;
 import hotelservice.dtos.HotelRequest;
 import hotelservice.dtos.HotelResponse;
-import hotelservice.entities.Hotel;
-import hotelservice.entities.Room;
 import hotelservice.service.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

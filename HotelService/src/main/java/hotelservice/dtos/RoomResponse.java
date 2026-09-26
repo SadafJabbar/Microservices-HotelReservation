@@ -4,6 +4,8 @@ import hotelservice.enums.RoomStatus;
 import hotelservice.enums.RoomType;
 import lombok.Builder;
 
+import java.io.Serializable;
+
 @Builder
 public record RoomResponse(
         Long roomId,
@@ -11,5 +13,5 @@ public record RoomResponse(
         RoomType type,
         Long hotelId,
         RoomStatus status
-) {
+) implements Serializable {
 }

@@ -30,7 +30,7 @@ public class BookingController {
 
     @Operation(summary = "Get  Booking record  By Id")
     @GetMapping("/booking/{id}")
-    public BookingResponse bookingById(@PathVariable ("BookingId") Long id){
+    public BookingResponse bookingById(@PathVariable ("id") Long id){
         return bookingService.bookingById(id);
     }
 

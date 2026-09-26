@@ -12,6 +12,8 @@ import hotelservice.enums.RoomStatus;
 import hotelservice.exception.HotelNotFoundException;
 import hotelservice.exception.RoomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class RoomService {
         this.hotelRepository=hotelRepository;
     }
 
-
+    @Cacheable("rooms")
     public RoomResponse roomById(Long id){
      Room room =roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
     return roomMapper.toResponse(room);}
@@ -58,6 +60,7 @@ public class RoomService {
         return roomResponses;
     }
 
+    @CacheEvict(value = "rooms",key = "#id")
     public String updateRoom(Long id){
         Room room=roomRepository.findById(id).orElse(null);
         room.setStatus(RoomStatus.BOOKED);

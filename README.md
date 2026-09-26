@@ -62,6 +62,12 @@ A small **Hotel Reservation Microservices** project built with Spring Boot to pr
 * DTOs & Mappers
 * Global exception handling
 * OpenAPI / Swagger
+### Redis Caching
+
+* Added Redis caching to **Hotel** and **Booking Services**.
+* Used `@Cacheable` for frequently accessed data.
+* Configured **TTL** for automatic cache expiration.
+* Redis runs through Docker.
 
 ## API Documentation
 

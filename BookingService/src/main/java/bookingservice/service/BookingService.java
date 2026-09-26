@@ -9,6 +9,7 @@ import bookingservice.enums.BookingStatus;
 import bookingservice.exception.BookingNotFoundException;
 import bookingservice.mapper.BookingMapper;
 import bookingservice.repository.BookingRepository;
+import org.springframework.cache.annotation.Cacheable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -36,7 +37,9 @@ public class BookingService {
         this.kafkaTemplate=kafkaTemplate;
     }
 
+    @Cacheable("bookings")
     public BookingResponse bookingById(Long id){
+        System.out.println("db hit");
         Booking booking= bookingRepository.findById(id).orElseThrow(()-> new BookingNotFoundException(id));
         return bookingMapper.transformToResponse(booking);
     }

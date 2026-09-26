@@ -2,7 +2,6 @@ package hotelservice.Controller;
 
 import hotelservice.dtos.RoomRequest;
 import hotelservice.dtos.RoomResponse;
-import hotelservice.entities.Room;
 import hotelservice.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

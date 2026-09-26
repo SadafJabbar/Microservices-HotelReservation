@@ -4,6 +4,7 @@ import bookingservice.enums.BookingStatus;
 import lombok.Builder;
 ;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
@@ -18,5 +19,5 @@ public record BookingResponse(
         LocalDate checkIn,
         LocalDate checkOut,
         BookingStatus status
-) {
+)implements Serializable {
 }

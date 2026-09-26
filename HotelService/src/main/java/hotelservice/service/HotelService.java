@@ -2,13 +2,13 @@ package hotelservice.service;
 
 import hotelservice.Mapper.HotelMapper;
 import hotelservice.Repository.HotelRepository;
-import hotelservice.Repository.RoomRepository;
 import hotelservice.dtos.HotelRequest;
 import hotelservice.dtos.HotelResponse;
 import hotelservice.entities.Hotel;
 
 import hotelservice.exception.HotelNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,7 +26,9 @@ public class HotelService {
         this.hotelMapper=hotelMapper;
     }
 
+    @Cacheable("hotels")
     public HotelResponse hotelById(Long id){
+        System.out.println("db hit");
         Hotel hotel= hotelRepository.findById(id).orElseThrow(()-> new HotelNotFoundException(id));
         return hotelMapper.toResponse(hotel);
     }

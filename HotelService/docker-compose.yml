@@ -6,7 +6,7 @@ services:
 
     environment:
       MYSQL_ROOT_PASSWORD: ${YOUR_PASSWORD}
-      MYSQL_DATABASE: hotel_booking_db
+      MYSQL_DATABASE: ${YOUR_DB_NAME}
 
     ports:
       - "3307:3306"
@@ -21,8 +21,8 @@ services:
     command: start-dev
 
     environment:
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK-USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK-PASSWORD}
 
     ports:
       - "8084:8080"
